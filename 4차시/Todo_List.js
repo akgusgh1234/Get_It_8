@@ -10,10 +10,29 @@ document.getElementById("addBtn").addEventListener("click", () => {
 
 const render = () => {
   const list = document.getElementById("taskList");
-  list.innerHTML = ""; // 초기화
-  tasks.forEach(task => {
+  list.innerHTML = "";
+
+  tasks.forEach((task) => {
     const li = document.createElement("li");
     li.textContent = task;
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "❌";
+
+    li.addEventListener("click", () => {
+      if (li.style.textDecoration === "line-through") {
+        li.style.textDecoration = "none";
+      } else {
+        li.style.textDecoration = "line-through";
+      }
+    });
+   
+    deleteBtn.addEventListener("click", () => {
+      tasks.splice(index, 1);
+      render();
+    });
+
+    li.appendChild(deleteBtn);
     list.appendChild(li);
   });
 };
